@@ -1,0 +1,44 @@
+---
+
+- debug:
+    msg: "Create directory structure for Monitorix container: {{ root_dir }}"
+
+- name: Create root directory
+  file: path='{{ root_dir }}' state=directory owner=root group=root mode=0755 recurse=yes
+
+- name: Create files directory
+  file: path='{{ root_dir }}/files' state=directory owner=root group=root mode=0777
+
+- name: Create config directory
+  file: path='{{ root_dir }}/config' state=directory owner=root group=root mode=0755
+
+- name: Copy Monitorix skeleton tarball
+  copy:
+    src: "{{ role_path }}/files/monitorix.tgz"
+    dest: "{{ root_dir }}/files/monitorix.tgz"
+
+- name: Unarchive tarball
+  unarchive:
+    src: "{{ root_dir }}/files/monitorix.tgz"
+    dest: "{{ root_dir }}/files"
+    copy: no
+    remote_src: yes
+
+- name: Remove tarball
+  file:
+    path: "{{ root_dir }}/files/monitorix.tgz"
+    state: absent
+
+- name: Add a+w to all files
+  file:
+    path: "{{ root_dir }}/files/"
+    mode: "a+w"
+    recurse: yes
+
+- name: CGI with o+x
+  file:
+    path: "{{ root_dir }}/files/monitorix/www/cgi"
+    mode: "o+rwx"
+    recurse: yes
+
+...

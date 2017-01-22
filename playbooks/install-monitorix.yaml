@@ -1,0 +1,46 @@
+---
+
+# Ansible playbook to install Monitorix Docker Container in NFVI Node
+#
+
+- name: Add Monitorix on the NFVI Build Node
+  hosts: local
+  gather_facts: True
+  vars_files:
+    - ../config/setup.yaml
+
+  roles:
+    - { role: "docker-image" }
+    - { role: "install-monitorix", node_type: 'build' }
+
+- name: Add Monitorix on the NFVI Control Nodes
+  hosts: control
+  gather_facts: True
+  vars_files:
+    - ../config/setup.yaml
+
+  roles:
+    - { role: "docker-image" }
+    - { role: "install-monitorix", node_type: 'control' }
+
+- name: Add Monitorix on the NFVI Storage Nodes
+  hosts: storage
+  gather_facts: True
+  vars_files:
+    - ../config/setup.yaml
+
+  roles:
+    - { role: "docker-image" }
+    - { role: "install-monitorix", node_type: 'storage' }
+
+- name: Add Monitorix on the NFVI Compute Nodes
+  hosts: compute
+  gather_facts: True
+  vars_files:
+    - ../config/setup.yaml
+
+  roles:
+    - { role: "docker-image" }
+    - { role: "install-monitorix", node_type: 'compute' }
+
+...

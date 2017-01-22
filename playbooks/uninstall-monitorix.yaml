@@ -1,0 +1,15 @@
+---
+
+# Ansible playbook to uninstall Monitorix Docker Container in NFVI Node
+#
+
+- name: Remove Monitorix
+  hosts: local
+  gather_facts: False
+  vars_files:
+    - ../config/setup.yaml
+
+  roles:
+    - { role: "uninstall-monitorix" }
+
+...

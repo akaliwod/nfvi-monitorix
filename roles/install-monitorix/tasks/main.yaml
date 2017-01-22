@@ -1,0 +1,13 @@
+---
+
+- debug:
+    msg: "Install Monitorix on: {{ title }}"
+
+- include: files.yaml
+
+- include: configs.yaml
+
+- include: start_script.yaml
+
+...
+

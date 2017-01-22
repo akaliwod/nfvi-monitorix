@@ -1,0 +1,9 @@
+---
+
+- debug:
+    msg: "Delete entire directory structure for Monitorix container: {{ root_dir }}"
+
+- name: Delete Monitorix directories
+  file: path='{{ root_dir }}' state=absent
+
+...

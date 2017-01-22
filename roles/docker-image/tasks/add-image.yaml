@@ -1,0 +1,17 @@
+---
+
+- name: Copy Monitorix Image tarball
+  copy:
+    src: "/tmp/monitorix-image.tar"
+    dest: "/tmp/monitorix-image.tar"
+
+- name: Add Image from tarball
+  shell: docker load -i /tmp/monitorix-image.tar
+
+- name: Remove tarball
+  file:
+    path: "/tmp/monitorix-image.tar"
+    state: absent
+
+...
+

@@ -1,0 +1,11 @@
+---
+
+# Add Docker Image with Monitorix from public repo
+#
+
+- include: prepare.yaml
+  when: inventory_hostname in groups['local']
+
+- include: add-image.yaml
+  when: inventory_hostname not in groups['local']
+

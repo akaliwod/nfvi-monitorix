@@ -1,0 +1,19 @@
+---
+
+- name: Copy Monitorix Start Script
+  copy:
+    src: "{{ role_path }}/files/start-monitorix.sh"
+    dest: "{{ root_dir }}"
+
+- name: Start script with a+x
+  file:
+    path: "{{ root_dir }}/start-monitorix.sh"
+    mode: "a+x"
+
+- name: Replace MONITORIX_ROOTDIR
+  replace:
+    dest: "{{ root_dir }}/start-monitorix.sh"
+    regexp: "MONITORIX_ROOTDIR"
+    replace: "{{ root_dir }}"
+
+...

@@ -1,0 +1,12 @@
+---
+
+- debug:
+    msg: "Prepare Docker Image Tarball: docker.io/akaliwod/monitorix"
+
+- name: Make sure that you have latest docker image
+  shell: docker pull index.docker.io/akaliwod/monitorix
+
+- name: Create Tarball from Image
+  shell: docker save -o /tmp/monitorix-image.tar docker.io/akaliwod/monitorix
+
+...

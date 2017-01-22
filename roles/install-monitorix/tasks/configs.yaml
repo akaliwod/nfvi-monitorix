@@ -1,0 +1,32 @@
+---
+
+- debug:
+    msg: "Prepare Monitorix configuration file for {{ ansible_hostname }} node type {{ node_type }}"
+
+- name: Create config directory
+  file: path='{{ root_dir }}/config' state=directory owner=root group=root mode=0755
+
+- name: Copy Monitorix Configuration File
+  copy:
+    src: "{{ role_path }}/files/monitorix-{{ node_type }}.conf"
+    dest: "{{ root_dir }}/config/monitorix.conf"
+
+- name: Replace MONITORIX_TITLE
+  replace:
+    dest: "{{ root_dir }}/config/monitorix.conf"
+    regexp: "MONITORIX_TITLE"
+    replace: "{{ title }}"
+
+- name: Replace MONITORIX_HOSTNAME
+  replace:
+    dest: "{{ root_dir }}/config/monitorix.conf"
+    regexp: "MONITORIX_HOSTNAME"
+    replace: "{{ ansible_hostname }}"
+
+- name: Replace MONITORIX_PORT
+  replace:
+    dest: "{{ root_dir }}/config/monitorix.conf"
+    regexp: "MONITORIX_PORT"
+    replace: "{{ port }}"
+
+

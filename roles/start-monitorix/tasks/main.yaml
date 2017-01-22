@@ -1,0 +1,10 @@
+---
+
+- debug:
+    msg: "Start Monitorix on: {{ title }}"
+
+- name: Start Monitorix
+  shell: "{{ root_dir }}/start-monitorix.sh"
+
+...
+
