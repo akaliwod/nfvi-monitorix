@@ -5,7 +5,7 @@
 prefix="MONITORIX_ROOTDIR"
 
 # Stop monitorix first
-count=`docker ps | grep monitorix | wc -l`
+count=`docker ps -a | grep monitorix | wc -l`
 if [ $count -gt 0 ];
 then
     docker stop monitorix

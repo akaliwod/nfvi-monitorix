@@ -1,7 +1,16 @@
 ---
 
 - debug:
-    msg: "Delete entire directory structure for Monitorix container: {{ root_dir }}"
+    msg: "Delete entire directory structure for Monitorix container: {{ root_dir }} and Docker image"
+
+- name: Stop Monitorix
+  shell: docker stop monitorix
+
+- name: Delete Container
+  shell: docker rm monitorix
+
+- name: Delete Monitorix image
+  shell: docker rmi docker.io/akaliwod/monitorix:latest
 
 - name: Delete Monitorix directories
   file: path='{{ root_dir }}' state=absent
